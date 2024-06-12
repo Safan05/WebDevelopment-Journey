@@ -1,0 +1,123 @@
+/**
+-------------------------------------------------------------------------------
+css have 3 main elements
+selector{
+	property:value;
+}
+
+1-you can select a whole tag like using element selector:
+h2{
+	
+	
+}
+here all h2 tags will have the style priovided
+
+2-also you can select a class , class is identified in html <tagname class="name"></tagname>
+, it is used in c++ so all elements of class: name will be selected
+
+.name{
+	
+	
+}
+here all elements of class name are selected
+
+3- you can select using id , id is a unique defined id for one tag
+
+#id{
+	
+}
+ note id overrides class & class overrides element ;
+ 
+4- inline selector is written in html , it overrides all mentioned selectors before & it is hardly used.
+-----------------------------------------------------------------------------------
+the multiple & combined selectrors
+
+1- we can select like 
+h1,h2,h3{
+	
+}
+here we selected the three elements all at once
+
+2- 
+div p{
+	
+}
+the space here make the selected elements are the <p> tag inside the <div> tag
+
+but it if it is like
+div > p{
+	
+}
+the tag<p> must be a direct child to tag<div>
+
+3- 
+div+p{
+	
+}
+here we select <p> that comes after <div>
+
+4- [width]
+{
+	
+}
+here we select all tags with attribute width
+--------------------------------------------------------------------------------
+pseudo element selectors:
+div::front{
+	
+}
+here we select elements after the div , it really doesn't exist but it will be just after the div so we can add content:""  to se it
+::first-child{
+	
+}
+means the first child
+::nth-child(n){
+	
+}
+select the nth child
+
+there is a pseudo classes like:
+::hover{
+	
+}
+means when you touch or pass over the content of the tag
+--------------------------------------------------------------------------------
+ media quries & responsive design
+ @media condition{
+	
+ }
+ -------------------------------------------------------------------------------
+**/
+*{ /** this is a universal selector , used to put default values**/
+	font-size:24px;
+}
+body{
+	/** padding **/
+	/** it is the inner spaces in the page**/
+	/** top  right  bottom  left , non set value takes it's value from opposite one & if just one is wtritten all takes it**/
+	padding: 10px 20px;
+	/** margins **/
+	/** it's usage is like padding **/
+	/** it is the space left on the sides of the box so it can be negative**/
+	margin: 5px;
+}
+font{
+	color:white;
+	font-size:16px;
+	font-style:ariel;
+}
+.Links{
+	color:red;
+	font-size:18px;
+	font-style:ariel;
+}
+.Heads{
+	color:white;
+	font-size:32px;
+	font-style:ariel;
+}
+#win{ 
+	color:green; /** green is just to identify that id overrides class **/
+	font-size:32px;
+	font-style:ariel;
+}
