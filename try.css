@@ -82,6 +82,57 @@ there is a pseudo classes like:
 }
 means when you touch or pass over the content of the tag
 --------------------------------------------------------------------------------
+Layout for webpage:
+
+1-Block, for sections in a webpage
+2-Inline, for text
+3-Table, for two-dimensional table data
+4-Positioned, for explicit position of an element
+--------------------------------------------------------------------------------
+short hand properties:
+are properties where you can write more than a property like:
+border: size stylr color;
+padding: top right bottom left
+and so all......
+--------------------------------------------------------------------------------
+Some attributes for box model:
+background-color:
+width:
+height:
+border-style:
+border-width:
+border-color:
+border-radius: "radius of border corners" or "radius of x / radius of y"
+padding:
+margin:
+
+min-width: this defines the minimum width 
+max-width: this defines the maximum width
+same exists for height!
+
+To hide an element:
+you can use visibilty:hidden;
+or 
+display:none;
+
+display: " property "
+the properties for display are:
+1-block 
+2-inline   "it is wrong to put width and height here as collapse occur"
+3-inline block 
+4-none "it hide the element and erase the space it took too"
+5-flex
+--------------------------------------------------------------------------------
+there are some properties to make image as a border , you can find them online.
+there are also some properties for box-shadow:inset offset-x offset-y blur spread-radius color.
+--------------------------------------------------------------------------------
+coloring systems
+1-#rrggbb
+2-rgb(r%,g%,b%)
+3-rgba(r%,g%,b%,transparency)
+4-hcl(hue%,sat%,lightness%)
+5-hcla(h%,s%,l%,transparency)
+--------------------------------------------------------------------------------
  media quries & responsive design
  @media condition{
 	
