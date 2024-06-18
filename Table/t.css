@@ -1,0 +1,35 @@
+.table{
+display: table;
+border-color: black;
+border-style:solid ;
+width:25%;
+margin: 10px;
+}
+.caption{
+display: table-caption;
+padding-bottom: 5px;
+text-align: center;
+text-transform: uppercase;
+}
+.head{
+display: table-header-group;
+color: floralwhite;
+background-color: cadetblue;
+text-align: center;
+}
+.footer{
+display: table-footer-group;
+color: currentColor;
+background-color: gainsboro;}
+.body{
+display: table-row-group;
+background-color: lavender;}
+.row{
+display: table-row;
+}
+.cell{
+display: table-cell;
+border-color: ghostwhite;
+border-style: solid;
+padding: 5px;
+}

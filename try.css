@@ -114,15 +114,7 @@ To hide an element:
 you can use visibilty:hidden;
 or 
 display:none;
-
-display: " property "
-the properties for display are:
-1-block 
-2-inline   "it is wrong to put width and height here as collapse occur"
-3-inline block 
-4-none "it hide the element and erase the space it took too"
-5-flex
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------
 there are some properties to make image as a border , you can find them online.
 there are also some properties for box-shadow:inset offset-x offset-y blur spread-radius color.
 --------------------------------------------------------------------------------
@@ -132,6 +124,72 @@ coloring systems
 3-rgba(r%,g%,b%,transparency)
 4-hcl(hue%,sat%,lightness%)
 5-hcla(h%,s%,l%,transparency)
+--------------------------------------------------------------------------------
+Positioning:
+the default is static position: it gives them the html default position & not affected by tansitions
+1-inherit: position of the parent div
+2-absolute: relative to the whole page "body"
+2-fixed: relative to the view port "seen part"
+3-relative: relative to it's given position
+4-sticky
+z-index:
+the layers of the page so the element of
+
+floating:
+doesn't have specific position , default is none
+--------------------------------------------------------------------------------
+display: " property "
+the properties for display are:
+1- table: it affects the data inside the container of the table according to 
+ - caption
+  -row 
+  -cell
+  -column
+  -etc
+ check folder table to learn more!
+2-flex:
+it affects what is inside the container , make the width flexible untill the components width is reached
+container attributes:
+ 1-flex wrap: it makes the objects go along cross"y" axis when width is less then total width
+ 2-flex direction: it is default as a row , if it is column the height will be the flexible one 
+ 3-flex flow : short hand for both wrap&direction
+ 4-justify-content: "center , stretch "default" , space evenly (equal space between them) , space between like evenly but no space with margins , etc..." 
+ 5-allign-items: have same properties but not height stretch
+ 6-allign-content: have same properties but appear in wrapping
+item attributes
+ 1-order : it's order to appear , it's default 0 
+ 2-allign-self: just allign this item , not the whole container
+ 3-flex-basis: it takes the width or height of the flex display according to row-> width , column->height
+ 4-flex-shrinkig: when no wrap , will you shrink this item"1 else "0" and default is 1;
+ 5-flex-gow: when no wrap , will you grow this item"1 else "0" and default is 0;
+ // note you can assign different values indicating the ratio of growth
+ 6-flex: short hand for "grow shrink basis"
+
+ 3-Display grid: 2d like table and regulate data like flex
+, by default it have 1 column and number of rows=number of container items and doesn't apply to floating items.
+ container attributes:
+	1-grid template columns: takes values according to number of columns like : 100px 100px here 2 columns , each of 100 px width
+	2-grid template rows: same as columns but for rows
+	3-grid auto rows: it takes the height of the automatic rows made by the grid.
+	4-grid auto columns: it takes the width of the automatic columns made by the grid.
+	5-grid auto flow: it's default is rows , means that 1 column is created and rows are created automatic & inverse happens in case of columns written
+	6-row-gap: height of gap between each row
+	7-column-gap: width of gap between each column
+	8-gap: short hand for both "row column"	
+		--> some values used in columns and rows grid template
+		1-fit-content(200px) here it will fit the content unitll width or height reach 100px then it will wrap
+		2-min-max(100px,200px) here it will fil the content from min=100px and max=200px then it will pass the data
+		3-repeat(4,"value") here it will make 4 equal columns with width or height value or repeat(autofill,width) makes number of columns just fills the screen
+		4-fr here it will divide the columns or rows values using fraction so if : 1fr,2fr the second will be double the first
+item attributes:
+	1-grid-row-start:row number or name to start in
+	2-grid-row-end:row number or name to end in
+	number can be "span number"
+	3-grid-row : short hand for row start and end "start/end"
+	same exist for columns
+	4-grid-area: short hanf for both row and column
+	5-align-self
+	6-justify-self
 --------------------------------------------------------------------------------
  media quries & responsive design
  @media condition{
