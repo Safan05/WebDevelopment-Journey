@@ -29,6 +29,7 @@ here all elements of class name are selected
  note id overrides class & class overrides element ;
  
 4- inline selector is written in html , it overrides all mentioned selectors before & it is hardly used.
+"!important" keyword makes the selector whatever where it was overrides any selector
 -----------------------------------------------------------------------------------
 the multiple & combined selectrors
 
@@ -138,6 +139,12 @@ the layers of the page so the element of
 floating:
 doesn't have specific position , default is none
 --------------------------------------------------------------------------------
+overflow:
+if it is hidden inside a div:
+	any overflow will be cutten inside this div.
+if it is scroll:
+	the div itself will have a scroll.
+--------------------------------------------------------------------------------
 display: " property "
 the properties for display are:
 1- table: it affects the data inside the container of the table according to 
@@ -190,6 +197,61 @@ item attributes:
 	4-grid-area: short hanf for both row and column
 	5-align-self
 	6-justify-self
+--------------------------------------------------------------------------------
+Background:
+1-background-color: solid color for background .
+2-background-image: image for background , note if this image is small it will be repeated to cover the div.
+3-background-repeat: it controls the repeat of the image with attributes : repeat - norepeat - repeat x - repeat y - round - round x - round y
+4-background-origin: defines the box from which the background begins.
+5-background-clip: defines the box from which the background is being cut.
+6-background-positin: defines the alignment of the image of background : center-left-right-top-etc...
+7-background-size: it's attributes are ->
+	1-cover: makes the image cover all the div.
+	2-contain: scales the image to the largest size such that both its width and its height can fit inside the content area.
+8-background-attachment:
+9-background: shorthand for all this.
+--------------------------------------------------------------------------------
+linear gradient:
+it can be written for background image.
+it takes colors.
+it can take directions like : tobottom-toright-toleft-etc...
+it can take pixels or length: which is length of colors.
+
+radial gradient:
+like linear one but with angles or circular and not linear.
+see this:
+repeating graients:
+it takes beginning and ending for each color , it repeats the gradient untill filling the tag , not just filling it one time.
+https://www.w3schools.com/css/css3_gradients.asp
+--------------------------------------------------------------------------------
+filter:
+it applies to the div and most used for the properties of images , it's functions are:
+	1-blur(value%)	
+	2-brightness(value%)	
+	3-contrast(value%)	
+	4-drop-shadow(x , y ,blur , color)
+	5-grayscale(value%)	
+	6-sepia(value%)	// like gray scale or old films
+	7-hue-rotate(value%)	// hue circle rotation
+	8-opacity(value%)	//transparency
+	9-saturate(value%)	
+--------------------------------------------------------------------------------
+for done shapes using gradient:
+https://projects.verou.me/css3patterns/
+--------------------------------------------------------------------------------
+Transition:
+
+note: if it is on the div it self this happens when hover and unhover but if it is on the pseudo class this happens on hover only.
+	1-transition-property : defines the property to be trnasitioned when action is done like hover.
+	2-transition-duration : time taken to transition.
+	3-transition-delay: time waiting to start the animation.
+	4-transition-timing-function: it is used to control how the time is distributed ex:
+		1-ease-out: means the time of transition is less or faster at the end.
+		2-ease-in: 	//	//	//	//	//	//	//	//	//	//	//	//	//    beginning.
+		3-ease-in-out: faster at both begining and ending.
+		4-cubic-bezier(x1,y1,x2,y2) points of the cubic curve of time..
+			https://easings.net/
+	5- transition: short hand for all this.
 --------------------------------------------------------------------------------
  media quries & responsive design
  @media condition{
