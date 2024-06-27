@@ -129,9 +129,9 @@ do{
 
 }while(condition)
 
-4-for in: will be discussed later
-for(in){
-
+4-for in: used for associative array , like itirators in c++
+for(i in array){ // used to loop over array
+// code;
 }
 */
 /*
@@ -235,6 +235,55 @@ array[1]=ob2;
          so for sorting numerical function we use
          sort(var (a,b){return a-b});
          as if a>b it will be + so it sort ascendingly
+
+3- associative array : it's the same idea of map in c++
+        var AssociativeArray = new array();
+
+        To put a key , it must be inside a string or another val
+        AssociativeArray["s1"]=15;
+        or
+        var x="12"
+        AssociativeArray[x]=15;
+
+        -We can't use array methods on it , so to loop we use for(in) loop
+         for(i in AssociativeArray) {
+         
+         }
+4- Date object: 
+        it's an object for date , it's constructor saves the current time for default, it has setters and getters to control it
+            var now=date();
+            // this contains the data of this second
+
+            getters:
+            getDate() returns day number in the month
+            getMonth() returns month number in the year , starting from 0
+            getYear() returns year number starting from 1900 , so for ex: 2024 is 124.
+            getFullYear() returns the actual number of year.
+            
+            setters are the same but to set not to get , there are methods for minutes and hours too , you can find and know them easily
+
+            important date methods:
+            toDatestring(); returns the date in this format
+             Day-name Month-name Day-num Year-num
+            toLocalString(); returns the date in this format
+            00/00/0000 00:00:00 am
+5- Error object: examples in index.
+        errors have many types as known , errors can be from the environment like syntax error or can be thrown by the developer
+        in case of logical errors
+        // search for js errors
+        to do we create an error object , and use throw.
+
         */
 var x=String("Abdallah Ahmed");
 console.log(x.length);
+
+var map=new Array();
+var x=prompt("enter first value")
+map[x]=1;
+map["Ce_Moi"]=" Abdallah";
+map["13"] = 13;
+var y=confirm("do you want to print")
+if(y)
+for(i in map){
+    console.log(i+" : "+map[i]);
+}

@@ -239,6 +239,27 @@ it applies to the div and most used for the properties of images , it's function
 for done shapes using gradient:
 https://projects.verou.me/css3patterns/
 --------------------------------------------------------------------------------
+Fonts:
+ fonts are important and make sure that the fonts exists on users devices , and I advice to use Google fonts which is web font 
+ so it doesn't depend on user downloaded font or use famous fonts like arial which exists on most devices.
+ -- you can also download the font and put it on the server of the web , this is most used with font icons like font awesome library.
+ Here is how to put google font in your html,css code , starts at 6:00
+ -->https://www.youtube.com/watch?v=MBq8ZFEIIaQ&list=PLDoPjvoNmBAzHSjcR-HnW9tnxyuye8KbF&index=1
+	1-font-familt:"f","f alt";
+	 browser will get f if found else it will make the family= f alt.	"This is the generic family"
+	2-font-size: px
+	3-font-weight: bold or 800 "ExtraBold" , 400
+	4-font-style: italic,
+	-- it is better to get weight and style embedded in the font form the webfont as it will not be browser dependant
+	@font-face{
+	src:url("downloaded font location")
+	font-family:"Give a custom name that you will use with this font"
+	}
+	-- you can define more than a font-face with the same family name and change the defined weight,style for them 
+		so if weight is 100 for example the defined one for light will work and if 800 the extra bold with work
+		, same for style.
+
+--------------------------------------------------------------------------------
 Transition:
 
 note: if it is on the div it self this happens when hover and unhover but if it is on the pseudo class this happens on hover only.
