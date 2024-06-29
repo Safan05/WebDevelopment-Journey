@@ -250,6 +250,13 @@ Fonts:
 	2-font-size: px
 	3-font-weight: bold or 800 "ExtraBold" , 400
 	4-font-style: italic,
+	5-font-stretch:
+	6-font-synthesis:
+	7-font-varient-position: can be sub-> like H2O or super-> like power
+	8-font-varient-caps:
+	9-font-varient-numeric:
+	10-font-varient: short hand.
+	11-line-height: height of text line
 	-- it is better to get weight and style embedded in the font form the webfont as it will not be browser dependant
 	@font-face{
 	src:url("downloaded font location")
@@ -259,6 +266,17 @@ Fonts:
 		so if weight is 100 for example the defined one for light will work and if 800 the extra bold with work
 		, same for style.
 
+	--there are font-types and differ in font-file extension , eot,ttf,woff,svg
+		see font-types video on mahara tech.
+		or read more:https://heyakash.medium.com/understanding-of-font-formats-ttf-otf-woff-eot-svg-e55e00a1ef2
+	-- see this for font icons:https://youtu.be/EoIxR4cq-Ew?si=BlKrGyOxdXVPqZ8U
+	-- the most famous library is font-awesome
+
+	Text-styling:
+		text-decoration: it cares about line and it has familiar properties we've know before.
+		text-shadow: like box shadow but around text.
+	Column-styling::
+		just splits the text into columns & contains familiar properties.
 --------------------------------------------------------------------------------
 Transition:
 
@@ -273,6 +291,58 @@ note: if it is on the div it self this happens when hover and unhover but if it 
 		4-cubic-bezier(x1,y1,x2,y2) points of the cubic curve of time..
 			https://easings.net/
 	5- transition: short hand for all this.
+--------------------------------------------------------------------------------
+Animation:
+to create animation we write:
+@key-frame name{
+from{
+ initial state
+}
+to{
+ finatl state
+}
+}
+or we can write it as
+@key-frame name{
+0%{
+
+}
+25%{
+
+}
+50%{
+
+}
+100%{
+
+}
+}
+where percentage is of the time
+then at the selector we use the following properties:
+animation-name: name;
+animation-duration: time which animation takes;
+animation-delay: time to begin animation;
+animation-timing-function:steps(number of steps to distribute time on)
+animation-iteration-count: times to repeat the animation.
+animation-directon: reverse-> will reverse the steps , alternate-> will go from 0 to 100 then from 100 to 0
+animation-fill-mode:forward -> will keep the last step the final shape , backward
+--------------------------------------------------------------------------------
+transform :
+transform-origin: detect the point of the origin point to transform from.
+
+scaleX,scaleY,translateX,translateY,skewX,skewY,rotateZ
+all of theese are functions written after transform for 2d:
+
+rotateX,rotateY,prespective:how far from the screen,
+all of theese are functions written after transform for 3d:
+
+back-face-visibilty:it determines when rotation around x,y will backface be visible or hidden.
+--------------------------------------------------------------------------------
+https://developer.mozilla.org/en-US/docs/Web/CSS/content
+see this for content to write in before&after pseudo elements.
+
+https://www.w3schools.com/css/css_pseudo_classes.asp
+see this for pseudo classes.
 --------------------------------------------------------------------------------
  media quries & responsive design
  @media condition{
