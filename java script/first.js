@@ -271,9 +271,45 @@ array[1]=ob2;
         errors have many types as known , errors can be from the environment like syntax error or can be thrown by the developer
         in case of logical errors
         // search for js errors
-        to do we create an error object , and use throw.
-
+        methods:
+        e.name-> returns name of the error.
+        e.message-> returns message of the error. 
+        to do we create an error object , and use throw but no more code is executed in the file after throwing.
+        as Ex:1 below , note: comment Ex:2 to use it 
         */
+/*
+Instance of method:
+wriiten as 
+instanceof type
+it gives true or false if the object created by constructor is instance of the type
+
+if(e instaceof RangeError){
+// do code
+}
+Error Handling:
+        1- try catch
+        try{
+            // code that throw happens within
+        }
+        catch{
+            // code to be executed when thrown instead of stopping 
+        }
+            // the rest is executed normally , see ex:2 
+        finally {
+            used for rest of the code in case catch itself had a error like typeerror
+            but if error exists in catch no code runs outside finally
+        }
+        2- onerror event: it is written globally for the environment and it will handle any throw automatically.
+            onerror=errorHandle();
+            errorHandle(msg,url,l,col,err)
+            {
+                //
+                //
+                //
+                return true -> if u don't want error to appear on console and false for vice.
+            }
+
+*/
 var x=String("Abdallah Ahmed");
 console.log(x.length);
 
@@ -287,3 +323,171 @@ if(y)
 for(i in map){
     console.log(i+" : "+map[i]);
 }
+// Ex:1
+//var x=parseInt(prompt("enter value between 10,30","20"));
+//if(x>30||x<10)
+//    throw RangeError("Out of range");
+//console.log("Hello!!")
+
+// Ex:2
+try{
+var x=parseInt(prompt("enter value between 10,30","20"));
+if(x>30||x<10)
+    throw RangeError("Out of range");
+console.log("Hello from try block!!")
+}
+catch(err){
+    console.log("Hello from catch block!!")
+}
+console.log("Hello from normal code!!")
+/*
+Functions:
+note-> function can be assigned to var and similarly inside an array as and it will be called anonymous function.
+var x=function (var a,var b){
+return a+b;
+}
+and if you put a name for the function it will be unseen except inside the function, i.e: recursive calls
+-> also it can't be hoisted as can't be called above it's implementation like statmment funciton
+*/
+/*
+object object: it is a custom object creation , object that has methods and properties you define.
+There are two ways to create it:
+1- using constructor or literal definition: 
+    -------------------------------------------------------
+    Defining:
+    var myobj=new object() // constructor
+    var myobj = {}; // literal creation
+    -------------------------------------------------------
+    Properties: can be defined using dot notation or subscribt method --> like associative array .
+    myobj.name="Abdallah"
+    myobj.Age="20"
+
+    using subscript
+    myobj["name"]="Abdallah";
+    myobj["Age"]=20;
+    -------------------------------------------------------
+    methods:
+    myobj.getname()=function{
+        return myobj.name;
+    }
+    -------------------------------------------------------
+2- literal creation:
+var myobj={
+    name:"Abdallah",
+    Age:20,
+    GetAge: function(){
+        return this.Age;
+    },
+    GetName: function(){
+        return this.name;
+    },
+
+methods for object object
+    1- hasOwnProperty("s1");
+        checks weather the object has property name s1 or not.
+    2- tostring();
+        it return string of the object , it is object Object.
+    // there is photo having the rest outside.
+    but note we can deal with it as associative array where property keys is like the key and values is the value
+    so we can use for in loop with it.
+};
+*/
+var myobj={
+    name:"Abdallah",
+    Age:20,
+    GetAge: function(){
+        return this.Age;
+    },
+    GetName: function(){
+        return this.name;
+    },
+};
+console.log(myobj.GetName());
+/*
+If we want to create alot of objects with the same prop and methods , ex: object for each student
+to create this we won't define the properties an methods each time but we'll use one of two way:
+1- Factory method: 
+    creating a function that returns object with desired properties and methods.
+
+    function student(name,id,sec){
+        return{
+            StudentName: name,
+            StudentId:id , 
+            StudentSection:sec,
+            StudentInfo: function(){
+                console.log("The student name is "+ this.StudentName +" His Id is "+this.StudentId)
+            },
+        }
+    } 
+2- Constructor method:
+    creating a constructor to the object
+    function Student(name,id,sec){
+        this.StdName=name;
+        this.StdId=id;
+        this.StdSec=sec;
+    }
+    when creating object we do the following:
+    var me= new Student("Safan","150","2");
+*/
+function student(name,id,sec){
+    return{
+        StudentName: name,
+        StudentId:id , 
+        StudentSection:sec,
+        StudentInfo: function(){
+            console.log("The student name is "+ this.StudentName +" His Id is "+this.StudentId +" and he is in section number" +this.StudentSection)
+        },
+    }
+} 
+var Moi=student("Abdallah",123,1);
+Moi.StudentInfo();
+function Student(name,id,sec){
+    this.StdName=name;
+    this.StdId=id;
+    this.StdSec=sec;
+}
+var me= new Student("Safan","150","2");
+console.log(me);
+for(i in me){
+    console.log(i+": "+me[i]);
+}
+/*
+defineproperty method:
+
+used to define a property for an object, but not like regular defintion here we can add 2 types of descriptors
+
+    Object.defineproperty(obj,"property name",{
+    descriptors 
+    })
+    or 
+    Object.defineproperties(obj,{
+        property1:{
+        descriptors
+        },
+        property2:{
+        
+        },
+    })
+1-data descriptors
+    value:undefined 
+    writable:false      //means you cannot edit this value
+    configurable:false  //means you cannot delete the property
+    enumerable:false // means you cannot do a for in loop to get it
+2-accessor descriptor:
+    get:undefined
+    set:undefined
+
+    they can be a function to set or get like
+    get:function(){return property;},
+    set:function(val){property=val;} 
+
+*/
+// follow this link to know about seal method for objects:
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal
+// follow this link to know about freeze method for objects:
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
+
+/**
+ * Function Object:
+ * 
+ */
