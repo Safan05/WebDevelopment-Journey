@@ -349,6 +349,7 @@ return a+b;
 and if you put a name for the function it will be unseen except inside the function, i.e: recursive calls
 -> also it can't be hoisted as can't be called above it's implementation like statmment funciton
 */
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 object object: it is a custom object creation , object that has methods and properties you define.
 There are two ways to create it:
@@ -491,3 +492,46 @@ used to define a property for an object, but not like regular defintion here we 
  * Function Object:
  * 
  */
+/**
+ * Function Object:
+ * it can be decalred in the 2 ways of any object or as a function statment but note
+ * anonymous function "stored in var , without name" can't be hoisted and if not stored in var it will be an error.
+ * constructor created function , is created every time you call it making it deficient.
+ *
+ * 2- IIFE "Immediatly invoked function expression"
+ *    it is anonymous function , not stored in var and written as shown:
+ *      (function(){
+ *              return 2004;
+ *          })()
+ *      so it will just return 2004 and won't give an error.
+ * 
+ * 3-Arguments Collection: all parameters we pass to a function are save in collection called arguments , so if we have a function that takes just 2 arguments
+ * and you pass 7 parameters to them , no error it will take the first two only , and also you can deal with the arguments as an array of dynamic size according to 
+ * input , it has a property length so for example , this example is written in code in ex:5:
+ * 
+ * function Add(){
+ *  var sum=0;
+ * for(var i=0;i<arguments.length;i++)
+ *  sum+=arguments[i];
+ * return sum;
+ * }
+ * 
+ * 4-Methods of function object:
+ *  call , apply and bind methods : they are used to apply the called function to another object in case this another object can't call this function
+ * like join function on strings , see Ex6 below:
+ */
+
+// EX5:
+  function Add(){
+   var sum=0;
+  for(var i=0;i<arguments.length;i++)
+   sum+=arguments[i];
+  return sum;
+  }
+  console.log(Add(1,2,3,4,5,6,7,8,9,10));
+
+  //Ex6
+
+  var str3="This is Abdallah"
+  //console.log(str3.join());//error
+  console.log([].join.call(str3,"__")); // here the function is called by array but applied to str3
