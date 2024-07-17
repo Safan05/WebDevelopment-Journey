@@ -210,6 +210,7 @@ now we will discuss each builtin-object
         6- split("") // return array containing spliting result of all substrings at string"".
          if the string is "" it means split at each character , " " split at empty space .
         7-replace("s1","s2") // it replaces first found s1 with s2.
+        8-s.trim() // removes whitespace from beginning and ending
 
         regular expression is used in replace : it's shape is
         /pattern/flag (i or g "global" or m)
@@ -505,6 +506,8 @@ used to define a property for an object, but not like regular defintion here we 
  *          })()
  *      so it will just return 2004 and won't give an error.
  * 
+ *      See this for more about IIFE-->   https://www.geeksforgeeks.org/immediately-invoked-function-expressions-iife-in-javascript/
+ * 
  * 3-Arguments Collection: all parameters we pass to a function are save in collection called arguments , so if we have a function that takes just 2 arguments
  * and you pass 7 parameters to them , no error it will take the first two only , and also you can deal with the arguments as an array of dynamic size according to 
  * input , it has a property length so for example , this example is written in code in ex:5:
@@ -535,3 +538,320 @@ used to define a property for an object, but not like regular defintion here we 
   var str3="This is Abdallah"
   //console.log(str3.join());//error
   console.log([].join.call(str3,"__")); // here the function is called by array but applied to str3
+  
+
+  //                                                                BOM (Browser Object Model)
+  /**
+   * It is the model for the browser environment to run js on it
+   * It's objects contain
+   * 1- Window which is the Parent of all objects
+   * 2- history
+   * 3- navigation
+   * 4- location
+   * 5- screen
+   * 6- Document "DOM" --> important and we'll talk about it
+   * 
+   * 
+   * 
+   * 1-Window object:
+   *    methods:
+   *        1- window Open , seen in example 7: 
+   *            Open("src","target","style")
+   *        2- window.close() --> this closes the glopal window , but if you want to close a child opened window , save it in a var and call win.close() 
+   *        or whatever you call it as ex 7.
+   *        3-window.focus()
+   *            makes your window is the focus
+   *        4-moveby(x,y)
+   *        5-moveto(x,y)
+   *        6-resizeby(x,y)
+   *        7-resizeto(x,y)
+   *        8-scrollby(x,y)
+   *        9-scrollto(x,y)
+   *        Ex 8: for both of them
+   *        
+   *        Windows timer methods:
+   *        
+   *        1- setinterval(fn,time in ms);
+   *            it takes a function fn , and executes it every interval which equals entered time.
+   *        2- clearinterval(interval name);
+   *            it takes a variable which equals the set interval which we set before and it stops the interval from executing forever.
+   *        3- settimeout(fn,time in ms);
+   *            it is the same as setinterval but differs in that it executes just one time after the given time passes.
+   *        See Ex 9 : for them
+   *        4- cleartimeout(name)
+   *            it is used when recursion is used with settime as the function call itself one time in settimeout 
+   *        see Ex 10 : to understand
+   * 
+   *        History object:
+   *       
+   *        Property:
+   *        .length  -> returns how many visited pages on the tap
+   *            Try history.length on console
+   * 
+   *        Methods:
+   *            . back() , forward() // just go back and forward in your tap.
+   *            . go(n) // go n pages forward , n can be negative.
+   * 
+   *        Location object: location from url , host name , etc...
+   *        Properties
+   *        location.href --> url
+   *        location.protocol --> protocol http/https
+   *        location.host --> host
+   *        location.hostname --> same as host
+   * 
+   *        methods:
+   *        location.replace("url")
+   *            it replaces the current page with another one without creating new visited one in history
+   *                try it in console.
+   *        location.assign("")
+   *            it visits new page after the page you're on it and no forward exists , also try it.
+   *        location.search()
+   *            it returns string of the query of the opened page.
+   *            Query is that when you submit a form , then go to a page it is saved in the url so you can take entered data using it.
+   *        location.reload() 
+   *            just refreshing the page
+   * 
+   *        Navigator object : deals with the browser , it's engine , etc...
+   *        
+   *        Properties:
+   *        navigator.language --> the language of the browser.
+   *        navigator.cookieenablet --> is cookies enabled or not.
+   *        navigator.platform --> Operating system of the client.
+   *        navigator.appcodename --> browser name , it's always Mozilla on any browser.
+   *        navigator.useragent --> browser data
+   *            
+   *        see this to detect browser: https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent
+   *            
+   * 
+   *        Document Object: (DOM)
+   *            document object model or html typed document.
+   *            used to deal with html
+   */   
+  //Ex 7:
+  var HelloWin;
+  function HelloWorld(){
+    HelloWin=window.open("HelloWorld.html","","width=300,height=300");
+  }
+  function CloseHelloWorld(){
+    HelloWin.close();
+  }
+    //Ex 8:
+    function MB(){
+      HelloWin.moveBy(50,50);
+      HelloWin.focus();
+    }
+    function MT(){
+      HelloWin.moveTo(50,70);
+      HelloWin.focus();
+    }
+  // It is called from hello button in html.
+// Ex 9:
+  var interval;
+   function SI(){
+    interval=setInterval(function (){
+        alert("I am inevitable !")
+    }, 3000);
+   }
+   function STI(){
+    clearInterval(interval);
+   }
+   function OSI(){
+    setTimeout(function() {
+        alert("I'm Iron Man !")
+    }, 1000);
+}
+   // Ex 10:
+   var interval2;
+   function OSI2(x){
+    alert("I'm Iron Man !"+x)
+    x++;
+    interval2=setTimeout(OSI2, 1000,x);
+}
+function STI2(){
+    clearTimeout(interval2);
+   }
+/**                                                         DOM
+ * DOM deals with html as a tree where html is the root of the tree
+ * each tag inside the html "children" are siblings ie. head and body
+ * and children of head are sibling and the same for body , each one is called node.
+ *      
+ *                                              Html    
+ *                                  Body                    Head
+ *                          Div1             Div2
+ *                      a1       a2       img1    a3
+ * To access a specific node we use document element which we knew intro about it in BOM
+ * document .body .children[0] --> gets Div 1 for example
+ * or there is another easier way which is a method in document called getElementById or getElementByClassName
+ * document .getElementById(id);
+ * document .getElementByClassName(name);
+ * also there is getElementByTagName() which select a whole tag
+ * note: you can store this in a var which will contain the data of the selected nodes.
+ * 
+ * Selectors:
+ *  you can also access nodes using selectors:
+ *  1- document.queryselector(#id) or document.queryselector(.class)
+ *      but note for selectors like by class name or type , it will only apply to the first mathcing element so we use option 2 below to select all matching queries
+ *  2- document.queryselectorAll()
+ *      but here all elements are returned as in array so we save it in a var and loop over it's elements
+ * see Ex11 below:
+ */
+//Ex11:
+function QS(){
+    document.querySelector(".class1").style.backgroundColor="red";
+}
+function QSA(){
+var elem;
+    elem= document.querySelectorAll(".class1");
+   for(var i=0;i<elem.length;i++)
+    elem[i].style.backgroundColor="red";
+}
+/**
+ * Note: after selecting elements is js , we can deal with all attributes as a property like in Ex11: we used style attribute as js property
+ * also we can modify the content by using one of the two prperties mentioned below:
+ *  1-inner Html --> here you can add html to the content. 
+ *  2-inner text --> here you can add text to the content.
+ */
+/**
+ * Some methods and properties for elements in DOM:
+ * 1-classlist.add("class name") here it adds another class to the element.
+ * 2-classlist.remove("class name") here it removes class from the element.
+ * 3-.style --> it return the style which is written inside the style attribute in html --> note this is as I told you above attribute as a propery.
+ * 4-getComputedStyle(element stored in var).style property u want --> it returns the applied style on the element.
+ *  
+ */
+/**
+ * Node Types
+ * 1- root node : html
+ * 2- element node: any tag in html exept html itself.
+ * 3- attribute node: attributes of any tag.
+ * 4- text node: content inside any element node.
+ * 5- comment node: any comment in html.
+ * 6- document node: the whole document itself is a node.
+ * We can create a node using it's name in method create as follows
+ * 1- createElement() -> method that create element
+ * 2- createAttribute() -> creates attribute
+ * 3- createTextNode()
+ * 4- createComment()
+ * Then we must put this node in html there are theese methods:
+ * 1- insertbefore(a,b);
+ *  node a is the new node , b is the node we want to insert a before it , see Ex12.
+ * 2- a.appendChild(b);
+ *      it makes a child node for b , see Ex13.
+ * 
+ * see this for more
+ * 1-https://www.w3schools.com/js/js_htmldom_nodes.asp
+ * 2-https://developer.mozilla.org/en-US/docs/Web/API/Node
+ */
+//Ex:12
+function NN(){
+    var a=document.createTextNode("New Node");
+    document.body.insertBefore(a,document.querySelector('#a1'));
+}
+//Ex:13
+function NNB(){
+    const para = document.createElement("p");
+    const node = document.createTextNode("This is a new paragraph.");
+    para.appendChild(node);
+    para.style.color="blue";
+    para.style.fontSize="18px";
+    //var b=document.createTextNode("New Node 2");
+    var a=document.getElementById("a2");
+    a.appendChild(para);
+}
+/**
+ * DOM Collection
+ * there are two main collections:
+ * 1- image collection:
+ *      we can access it using 
+ *          1-documentimages[img number] for ex:   documentimages[0]
+ *          2-documentimages["img name"] for ex:   documentimages["image1"]
+ * 2- form collection:
+ *      We access it like image collection but inside form there may be elements like textbox,radiobutton,etc...
+ *          so we use it like:
+ *               documenforms[0].element[element number]
+ * the same is done for any other collection like anchor
+ */
+
+/**
+ * Cookies:
+ *  it is text file created by the server , exists at client side and can be only accessed by the server,
+ *  also it is used by the server so it don't ask the user about his information every time he goes to a page in am website.
+ *  There are two types of cookies:
+ *  1- presistent cookie:
+ *      it has an expirey date , after which it expires     --> deal with remember me.
+ *  2- Session cookie:
+ *      it expires as just as you close the browser     --> deal with just logging in without remebering
+ * 
+ * how to create and read cookies:
+ *  to read u can use : console.log(document.cookie);
+ *  to create u can use:
+ *  document.cookie="cookiename="val"; expires="expirey date" " 
+ *  see Ex:14
+ * 
+ * also Ex:15 to know how to display cookies.
+ * 
+ * Note: We tend to save cookies in a page that isn't the login page as the page of cookies we visit it each time we want to get cookies in any seen page in the site.
+ * 
+ */
+
+//Ex:14
+function SaveInfo(){
+    var username=document.getElementById("un").value;
+    var password=document.getElementById("p").value;
+    var now=new Date(); // we know that date constructor intialize the constructing date
+    now.setMonth(now.getMonth()+3); // means three month later.
+    document.cookie="username="+username+";expires="+now;
+    document.cookie="password="+password+";expires="+now;
+}
+//Ex:15
+function DisplayInfo(){
+    var cookies_saved=document.cookie;
+   var a= document.cookie.indexOf("username");
+   var s= document.cookie.indexOf(";",a);
+   var d1=document.createTextNode( document.cookie.split(";",s)[0]);
+   var d2= document.createTextNode(document.cookie.split(";",s)[1]);
+   var p1=document.createElement("h3");
+   var p2=document.createElement("h3");
+   p1.appendChild(d1);
+   p2.appendChild(d2);
+   var x=document.getElementById("display");
+   x.appendChild(p1);
+   x.appendChild(p2);
+}
+// I can make a general function for display cookies like in Ex16:
+//Ex:16
+function GenDisplayCookies(){
+    var AssociativeArray = [] ;
+    var splitCookies=document.cookie.split(";");
+    for(var i=0;i<splitCookies.length;i++){
+        var x=splitCookies[i].split("=")
+        AssociativeArray[x[0].trim()]=x[1];
+    }
+    return AssociativeArray;
+}
+function DisplayCookies(){
+    var print=GenDisplayCookies();
+    for(i in print){
+        var h=document.createTextNode(i);
+        var v=document.createTextNode(" : "+print[i]);
+        var x=document.getElementById("display");
+        x.appendChild(h);
+        x.appendChild(v);
+        x.appendChild(document.createElement("br"));
+    }
+}
+//Ex 17: Remeber me & logout Examples
+function SignIn(){
+    var username=document.getElementById("un").value;
+    var password=document.getElementById("p").value;
+    var now=new Date(); // we know that date constructor intialize the constructing date
+    if(document.getElementById("Remember").checked)
+        now.setMonth(now.getMonth()+3); // means three month later.
+    document.cookie="username="+username+";expires="+now;
+    document.cookie="password="+password+";expires="+now;
+}
+function Logout(){
+    var cookie = GenDisplayCookies();
+    for(i in cookie)
+        document.cookie=i+"=;expires=1-1-2001"
+}

@@ -245,7 +245,7 @@ Fonts:
  -- you can also download the font and put it on the server of the web , this is most used with font icons like font awesome library.
  Here is how to put google font in your html,css code , starts at 6:00
  -->https://www.youtube.com/watch?v=MBq8ZFEIIaQ&list=PLDoPjvoNmBAzHSjcR-HnW9tnxyuye8KbF&index=1
-	1-font-familt:"f","f alt";
+	1-font-family:"f","f alt";
 	 browser will get f if found else it will make the family= f alt.	"This is the generic family"
 	2-font-size: px
 	3-font-weight: bold or 800 "ExtraBold" , 400
