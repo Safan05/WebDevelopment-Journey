@@ -855,3 +855,132 @@ function Logout(){
     for(i in cookie)
         document.cookie=i+"=;expires=1-1-2001"
 }
+/** 
+ * Events:
+ *  JS is an event based language meaning that when an event is done a method applies
+ * <tag onevent="fun()";>
+ * 1- mouse based events:
+ *      onclick="method()";
+ *      ondblclick="method()";
+ *      onmouseover="method()";
+ *      onmouseout="method()";
+ *      etc...
+ * 2- keyoboard based events:
+ *      onkeypress="method()";  // on pressing
+ *      onkeyup="method()";     // after leaving the key
+ *      onkeydown="method()";   // while pressing the key
+ * 3- others:
+ *      onfocus="method()";  // when focusing on box
+ *      onblur="method()";   // when unfocusing the box
+ *      onload="method()";   // when loading event.
+ *      onunload="method()"; // when leaving event. 
+ *      onerror="method()";  // when error happens
+ * 4- forms:
+ *      onreset="method()";
+ *      onsubmit="method()";
+ */
+
+//Ex 18: is on html file within textbox line 48.
+
+/**
+ * Dropdown list:
+ *      Properties: 
+ *          1- .length : number of options in this list
+ *          2- .selectedIndex: returns the selected index if just one is selected
+ *          3- .options: array of objects , each object has .selected properties and for more than select
+ *              .text & .value
+ */
+// this keyword refer also to the element which event occured on and we can send it as object to functions.
+/**
+ * As we said before , as onevent is attribute for html , we can deal with it as object property in js directly
+ * Ex:
+ * let var x= document.getobjectbyid("btn");
+ *          x.onclick=func;  // without brackets wherever your function doesn't return a function or return anonymous function 
+ */
+/**
+ * Some elements has default onvent bevahoir like anchor tag , goes automatically to visit the href 
+ * to prevent it just put onevent="return false;"
+ * see Ex18:
+ */
+
+//Ex18:
+function checkReset(){
+    var response=confirm("do u want to clear the form ?")
+    return response
+}
+/**
+ * There is an object for event or event object which is implicity created on event and it's name is event and you can send it to a function to use it's properties
+ * ,it has a method called prevent default() which do the same as in ex:18
+ * some event properties:
+ *  1- offest x : x coordinates from inner border ie:not including padding in Origin.
+ *  2- client x : // // // // // //  outer border ie:including padding in Origin.
+ *      same for y
+ *  3- .target : target tag of the event
+ *  4- .type: type of event
+ *  5- cancel bubble : see this link
+ *      https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
+ * Methods:
+ *  1- preventdefault() // prevent the default action to happen
+ *  2- stopPropagation() // it stops the propagation of the event to bubble
+ *      capture mode: is when event happens in child div it begins from grandparent down to child
+ *      bubble mode : event will start from child and goes up to grandparent
+ *      so we can say that it stops actions from spreading to outer elements if exist 
+ *  3-object.addEventListner("event",func,true or false) // false is default for bubble mode and true is for capture mode
+ * 
+ * 
+ */
+/**
+ * Custom Event creation:
+ * 1- create:
+ *  create event object using constructor that takes it's name:
+ *  var myevent=new event("seen") // the suppose the event is called seen.
+ * 2- listen:
+ *  The object that will listen to the event , or which the event will fall on.
+ *  we use object.addEventListner("event",func,true or false) 
+ *  // func is what will happen when it is fired.
+ * 3- fire: define when will the event fire 
+ *      object.dispatchEvent("event")   this will fire the event.
+ */
+/**
+ * AJAX "Asynchronus javascript and xml"
+ * it is used in retreiving data to the client from the server without refreshing and Asynchronusly.
+ * to create AJAX we need XHR object which is an API:
+ *  properties: 
+ *  1- .onreadystatechange 
+ *  2- .readystate
+ *  states are:
+ *      1-Uninitialized
+ *      2-Loading
+ *      3-Loaded
+ *      4-Interactive
+ *      5-Complete
+ *  3- .status : return status as number
+ *      200 for OK
+ *      404 for PageNotFound
+ *      503 for fallen server
+ *      from 100 to 199 -> means info
+ *      from 200 to 299 -> means succeded
+ *      from 300 to 399 -> Redircted
+ *      from 400 to 499 -> NotFound "Client Error"
+ *      from 500 to 599 -> Server Error
+ *  4- .statusText : return status as a text.
+ *  5- .responseText : returns response as a text.
+ *  
+ * Methods:
+ *  1-open("method","url",[options])
+ *      method can be get or post request.
+ * know more about the methods here : https://apidog.com/blog/get-vs-post-request-the-difference-between-http-methods/
+ *  2-Send(content) , content is sent with post request and generally it is used to send the request.
+ * 
+ * How to construct it:
+ *      var xhttp = new XMLHttpRequest();
+ * -----------------------------------------------------------------------------------------------------------------------
+ * 
+ * We mostly use json files to save and retrieve our data , see this links for more
+ *  https://fileinfo.com/extension/json#google_vignette
+ *  https://www.w3schools.com/js/js_json_intro.asp
+ * 
+ * methods used with retrived json object from responseText
+ *  1- JSON.parse(json object)  it return java script object
+ *  2- JSON.stringfy(java script object) it return json object
+ */

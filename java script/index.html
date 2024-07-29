@@ -44,10 +44,11 @@ var action=confirm("Do you wanna continue");
     <input type="button" id="a1"value="New node before me" onclick="NN();">
     <div style="border-width: 3px; border-style: solid; height: 200px; width:200px;" id="a2"></div>
     <input type="button" id="a1"value="New node inside box" onclick="NNB();">
-    <form>
-        <h4>Username</h4><input type="text" id="un">
+    <form onreset="return checkReset()">
+        <h4>Username</h4><input type="text" id="un" onfocus="select()" onblur="this.value='Ce_moi'">
         <h4>Password</h4><input type="password" id="p">
-        <input type="checkbox" id="Remember"><label for="Remember"> Remember Me </label>
+        <input type="checkbox" id="Remember"><label for="Remember"> Remember Me </label> <br>
+        <input type="reset" value="clear">
     </form>
     <br></br>
     <button onclick="SignIn()">SaveInfo</button>
@@ -55,5 +56,6 @@ var action=confirm("Do you wanna continue");
     <button onclick="DisplayInfo()">DisplayInfo</button>
     <button onclick="DisplayCookies()">DisplayCookies</button>
     <div id="display"></div>
+    <a href="www.google.com" onclick="return false;">Google</a>
 </body>
 </html>
