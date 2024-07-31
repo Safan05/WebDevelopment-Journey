@@ -350,7 +350,7 @@ return a+b;
 and if you put a name for the function it will be unseen except inside the function, i.e: recursive calls
 -> also it can't be hoisted as can't be called above it's implementation like statmment funciton
 */
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//--------------------------------------------------------------------------------------------------------
 /*
 object object: it is a custom object creation , object that has methods and properties you define.
 There are two ways to create it:
@@ -430,6 +430,8 @@ to create this we won't define the properties an methods each time but we'll use
     }
     when creating object we do the following:
     var me= new Student("Safan","150","2");
+
+    You can also make this functions and store them in a variable
 */
 function student(name,id,sec){
     return{
@@ -982,5 +984,177 @@ function checkReset(){
  * 
  * methods used with retrived json object from responseText
  *  1- JSON.parse(json object)  it return java script object
- *  2- JSON.stringfy(java script object) it return json object
+*  2- JSON.stringfy(java script object) it return json object
+*/
+//
+//------------------------------------------------------------------------------------------------------------------------
+/*
+You can see this oop crash course for js if u want to learn more:
+    https://www.youtube.com/watch?v=vDJpGenyHaA
+*/
+/*
+Some OOP:
+1-we can define our own object using factory method or constructor method which are discussed above in object object on line 410.
+------------------------------
+Function Shared Pattern:
+    it is when we define a function and use it inside a constructor so u can use it inside or outside the constructor.
+
+------------------------------
+Prototype Property:
+    Each function has prototype property which is that you can define a function associated with your defined funciton , 
+    we use it with the constructor so we don't create the method of your created object every time u create it.
+
+    see the difference in the Ex below:
+    1- :
+        var student=function(name,id,sec){
+            this.StudentName: name,
+            this.StudentId:id , 
+            this.StudentSection:sec,
+            this.StudentInfo: function(){
+                console.log("The student name is "+ this.StudentName +" His Id is "+this.StudentId);
+            },
+    } 
+    here every time you create object using this constructor the function of student info is created 
+    2-:
+        var student=function(name,id,sec){
+            this.StudentName: name,
+            this.StudentId:id , 
+            this.StudentSection:sec,
+    }   
+        student.prototype.StudentInfo= function(){
+                console.log("The student name is "+ this.StudentName +" His Id is "+this.StudentId);
+            };
+---------------------------------
+you can also override functions using prototype like the tostring function we mentioned before in object object , and you can override it in your own object like this ex:
+  var student=function(name,id,sec){
+            this.StudentName: name,
+            this.StudentId:id , 
+            this.StudentSection:sec,
+    }   
+        student.prototype.tostring= function(){
+                return("The student name is "+ this.StudentName +" His Id is "+this.StudentId);
+            };
+--------------------------------
+
+You can overload constructor by just setting default values so you can use it with different arguments!.
+
+---------------------------------
+Private members are just the local variables defines as var like:
+  var student=function(name,id,sec,age){
+            this.StudentName: name,
+            this.StudentId:id , 
+            this.StudentSection:sec,
+            var age:age;
+    } 
+            here age is private member
+            and you can access it by setters and getters , but note this functions are inside the constructor & not prototype.
+            --> setters and getters are called privilage methods.
+
+-------------------------------
+private methods are just inner functions , not defined in this.funName()
+but note:if this.variableName is inside a function and this function isn't called from object it will search globally which may get undefined "implicit bining"
+so we use call and bind functions mentioned above at line 470 so we can me "explicit binding".
+
+
+!!!!! IMPORTANT 
+ !!!!!!   Understand the this, closure and inner functions !!!!!!
+
+-------------------------------------------------------------------
+Note:
+    All non-primitive type objects are reference values.
+so for ex1:
+      var student=function(name,id,sec,age){
+            this.StudentName: name,
+            this.StudentId:id , 
+            this.StudentSection:sec,
+            var age:age;
+    } 
+            var st1=student("Safan",12,1,20);
+            st2=st1;
+            here if I change any thing is st2 it will change in st1 too this is what I meant by refernce
+
+            if you want to just copy it ie. copy constructor equivalent: see this;
+            st2=student()
+                for(var i in st1){
+                    st2[i]=st1[i];
+                }
+-------------------------------------------------------------------
+*/
+
+var student2= function(name,id,sec){
+    this.StudentName1= name;
+    this.StudentId1 = id ;
+    this.StudentSection1=sec;
+   // var ag= age;
+} 
+student2.prototype.tostring= function(){
+    return("The student name is "+ this.StudentName1 +" His Id is "+this.StudentId1);
+};
+    var stu1=new student2("Safan",12,1,20);
+    stu2=stu1;
+    var stu3=new student2("Safan",12,1,20);
+    var stu4=new student2();
+    for(var i in stu3){
+        stu4[i]=stu3[i];
+    }
+    console.log(stu1.tostring());
+/*
+ ------------------------------------------------------------------------
+
+ object.__proto__           --> will return the functions in the prototype if the object and if you add another one like
+ object.__proto__.__proto__     --> will return the functions in the parent of the object which is almost the object
+ and keeps untill null or find nothin and this is called prototype chain.
+
+ -------------------------------------------------------------------------
+    Inheritance:
+        we can inherit the whole constructor or class as a prototype for the child "PseudoClassical inheritance"ex:
+            child.prototype=new parent();
+            // it must come before any prototype function adding as it will replace them.
+        or we can inherit just the prototype of the parent "prototype inheritance"ex:
+            child.prototype=parent.prototype();
+        and the best way is to call the constructor of the parent object inside the child constructor but we use call or bind to 
+        force it to work on this "child" object and then make the two prototypes equal but as instance not always so edits in child won't apply on parent
+        ex:
+        function child(nm,id){
+            parent.call(this,nm);
+            this.ID=id;
+        }
+            child.prototype=Object.create(parent.prototype);
+
+            here the child will contain both person and child methods and properties
+        
+        A Question: what is the difference between the first and third way of inheritance ?
+        Answer    :1- in the first way methods and properties of parent are not assigned directly to child but as an instance.
+                   2- in the first way the constructor of the object is the child one but in the third method the constructor is 
+                   the parent one as it will be the first seen from the object object "parent of all objects" unless you define
+                   the constructor of the child in the prototype chain so it will not level up to object object.
+                   3- the parent objects can access the child methods and properties in the third way unless you make it abstract
+                   by checking the constructor and if it is from the parent throw exception . 
+
+                   note: if we didn't make the parent prototype as an object , in answer 2 what we did will make the child constructor 
+                   the constructor for parent too so we'd have been in a cycle running around each other :)
+
+        So inheritance in js is called delegation behavoir : we link the child to parent through prototype chain and not copying like in 
+        other languages.
+
+            if we've overriden a function in the child prototype we can use __proto__ to reach the function of the parent without overriding.
+
+ -------------------------------------------------------------------------
+ we can create static member || "class member" for our class by adding it as a property to the constructor itself ex:
+    var student2= function(name,sec){
+    this.StudentName1= name;
+    this.StudentSection1=sec;
+   // var ag= age;
+} 
+   student2.id=0;
+    and it will be only accessible through the constructor function.
+ -------------------------------------------------------------------------
+
  */
+ var student3= function(name,sec){
+    this.StudentName2= name;
+    this.StudentSection2=sec;
+   // var ag= age;
+} 
+   student3.id2=0;
+   var std55=new student3("Boody",1);

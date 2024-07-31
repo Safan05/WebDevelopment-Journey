@@ -1,11 +1,11 @@
 /*
 To Run Mongod you will open cmd and choose mongod.exe and run it , before this u must create a folder in the same partition of the mongod.exe of name data and subfolder
 of name db , as this is the default path of the database server
-
+======================================================================================================================
 --> If you want to do a custom path:    
     write
         mongod.exe --dbpath "path"
-
+======================================================================================================================
 --> To open the ide of mongo 
     1- at first run the server and leave the cmd running it without closing
     2- open another cmd and run mongo.exe   // note server was mongod.exe but ide is mongo.exe
@@ -13,4 +13,79 @@ of name db , as this is the default path of the database server
 
 but note that mongo,exe no longer exist after v6 , download mongo shell from this link and open it instead:
  https://www.mongodb.com/try/download/shell
+======================================================================================================================
+
+Show dbs command:
+	it shows you three databases
+	1-admin :  0.000Gb	--> For authentication & authorization like passwords.
+	2-confing: 0.00Gb	--> For shared cluster process on metadata .
+	3-local:   0.00Gb	--> For metadata replication.
+When your created databases have data it becomes visible and then it will appear when using dbs.
+======================================================================================================================
+Info about added objects:
+	-You can define your own _id: in your object but take care not to duplicate it or it will throw an exception.
+	-You can objects with different attributes in the same document.
+======================================================================================================================
+DB Functions: More description below 
+	1-db: tells u the name of the database you are using.
+	2-use "db_name": if it exists it switches to it , else it creates new one with this name.
+	3-db.createCollection("collection name") : it creates a collection inside this db.
+	4-show collections : it shows all the available collections in the Db.
+	5-db.collection_name.insert({json object}) : it inserts document inside the collection name.
+	6-db.collection_name.drop() : it deletes the collection
+	7-db.dropDatabase() : it is used to delete the current database you're on
+	8-db.collection_name.find() : shows u all the documents inside a collection
+	9-db.collection_name.find().pretty : like find but pretty :)
+	10-db.collection_name.findOne() : shows the first matching field and can take queries and projection like find.
+	11-db.collection_name.update(<query>,<set>,<multi>) : shows u all the documents inside a collection
+	12-db.collection_name.save({_id:"",field:""}) : it deletes the object with the _id given and creates new one with the same _id
+                    				       and the given fields.
+	13-db.collection_name.remove(query) : it deletes all objects the match the query , if no query is given it deletes everything.
+======================================================================================================================
+in db.collection.find():
+	you can add field:"value" to search for it .
+ex: db.Books.find({pages:100}) : here it will return the document that have pages=100.
+	
+	also you can find with operators like pages>100 or pages<100 but we write operators in latext:
+	1-$gte >=
+	2-$gt  >
+	3-$lt  <
+	4-&lte <=
+	5-$ne  !=
+ex:db.Books.find({pages:{$ne:100}}) : here it will return documents that have pages not equal to 100. 
+
+You can use and , or operators on your questions too but they are written in latex also:
+	1-find({$and:[{pages},{size}]})
+	2-find({$or:[{pages},{size}]})
+Note1:you can use in instead of or if you ask for the same field ex:
+	find({Title:{$in:["val1","val2","val3"]}})
+Note2:you can use exists:bool to ask if this field exists ex:
+	find({Title:{$exists:true}})	--> this will return objects that contain Title property.
+Note3: you can make find just returns the fields you want from each document by projection
+	Projection structure is as follows: find({Query},{Projection}) , query can be empty but it must exists
+	ex:
+	find({},{Title:1, Pages:1}) --> this will return also Title and pages fields.
+======================================================================================================================
+Functions with find
+
+1-.find().limit(number)  --> it just display documents with maximum limit of this number from beginning
+2-.find().skip(number)  --> it skips the first "number" elements then begin to display after them from beginning
+	Note: You can use both so you have a limit after the skipped docs
+3-.find().sort({field:1}) 1 or true for ascending and -1 for descending
+	Note: sort doesn't really apply
+
+More Functions here:https://www.mongodb.com/docs/manual/reference/method/db.collection.find/
+======================================================================================================================
+db.collection_name.update(<query>,<set>,<multi>)
+
+1-query is like what we did on find query
+2-set is written like($set:{field:"name"})
+3-you can neglect writing multi but it will update the first matching one , if you want all just multi:true
+
+Ex:
+.update({Size:{$exists:false}},{$set:{Size:"A4"}}) --> here just the first matched one will be updated.
+.update({Size:{$exists:false}},{$set:{Size:"A4"}},{multi:true}) --> here all matched will be updated.
+======================================================================================================================
+You can use Robo3T as the ide for your database which is easier than cmd, but I likes cmd more!
+======================================================================================================================
 */
