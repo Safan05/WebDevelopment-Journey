@@ -51,7 +51,7 @@ The notes are organized into directories based on the technology and topic. Each
 - `backend/` (to be added)
   - Node.js
   - Express.js
-  - MongoDB
+  - MongoDB "added now , navigate to backend folder"
 
 ## Course Source
 The notes are primarily based on the courses provided by MaharaTech from the Information Technology Institute (ITI). These courses offer a thorough understanding of each topic and are highly recommended for anyone looking to learn front-end and full-stack development.
