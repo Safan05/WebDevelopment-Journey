@@ -8,8 +8,7 @@ Welcome to my GitHub repository where I document all the important notes and lea
 - [Notes Organization](#notes-organization)
 - [Course Source](#course-source)
 - [How to Use This Repository](#how-to-use-this-repository)
-- [Contributing](#contributing)
-- [License](#license)
+د
 
 ## Introduction
 This repository serves as a comprehensive collection of notes and resources from my learning path in front-end and full-stack development. It is designed to be a reference for myself and others who are on a similar journey.
