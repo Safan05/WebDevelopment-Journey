@@ -16,9 +16,9 @@ This repository serves as a comprehensive collection of notes and resources from
 
 ## Technologies Covered
 ### Front-End
-- **HTML**
-- **CSS**
-- **JavaScript**
+- **HTML**  "Found inside first.html file"
+- **CSS**   "Found inside try.css file"
+- **JavaScript** "Found inside javascript folder"
 
 ### Frameworks and Libraries (to be added)
 - **Bootstrap**
