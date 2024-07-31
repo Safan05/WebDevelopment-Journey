@@ -7,9 +7,6 @@ Welcome to my GitHub repository where I document all the important notes and lea
 - [Technologies Covered](#technologies-covered)
 - [Notes Organization](#notes-organization)
 - [Course Source](#course-source)
-- [How to Use This Repository](#how-to-use-this-repository)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 This repository serves as a comprehensive collection of notes and resources from my learning path in front-end and full-stack development. It is designed to be a reference for myself and others who are on a similar journey.
@@ -54,12 +51,7 @@ The notes are organized into directories based on the technology and topic. Each
 - `backend/` (to be added)
   - Node.js
   - Express.js
-  - MongoDB
+  - MongoDB "added now , navigate to backend folder"
 
 ## Course Source
 The notes are primarily based on the courses provided by MaharaTech from the Information Technology Institute (ITI). These courses offer a thorough understanding of each topic and are highly recommended for anyone looking to learn front-end and full-stack development.
-
-## How to Use This Repository
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
