@@ -70,3 +70,18 @@ function greeting(name){
 }
 var x=process.argv;
 greeting(x[2]);
+
+// core modules:
+// to use core modules like os we must require them first and it's better to require them in a const variables
+
+/**
+ * os module:
+ *  it carries data about the operating system of the running device, like navigator object which carries data about browser on JS.
+ *  os.hostname() -> name of device host.
+ *  os.arch() -> architecture
+ *  os.platform() 
+ *  os.type()   -> OS type
+ *  os.freemem() -> free memory
+ *  os.totalmem() -> total memory
+ *  More: https://nodejs.org/api/os.html
+ */
