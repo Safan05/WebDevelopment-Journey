@@ -1,4 +1,4 @@
-/**
+/* 
  * let vs var
  * var : is a function scope & hoisted
  * let : is a block scope & not hoisted
@@ -207,6 +207,30 @@ let y=5;
         console.log(iter.next());
         console.log(iter.next());
         */
+    /**
+     * Set Object:
+     *  It is object like array but contain unique values , each value exist just one time
+     *  Methods:
+     *      set.add(val)    // add value to set.
+     *      set.delete(val) // delete value from set if exists.
+     *      set.has(val)    // checks if value exists or not.
+     *      set.clear()     // clears the set.
+     * Properties:
+     *      set.size        // return the size of the set.
+     * 
+     * defined as:
+     *      var myset=new Set([intial values if you want]);
+     *          see the following Ex:
+     */
+        var myset=new Set([1,2,"CeMoi"]);
+        myset.add(1);       // won't be added as it already exists one time.
+        console.log(myset);
+        myset.add("1");
+        console.log(myset);
+    /**
+     * Map Object:
+     *  
+     */
     /**
      * Class keyword:
      *  it is a keyword added in ES6 to be used in creating classes , we add the constructor , setters , getters , methods and data members inside it  

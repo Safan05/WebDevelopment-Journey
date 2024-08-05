@@ -85,3 +85,16 @@ greeting(x[2]);
  *  os.totalmem() -> total memory
  *  More: https://nodejs.org/api/os.html
  */
+
+/**
+ * Path module:
+ *  1-path.join(direcotry,filename) --> it returns another path of the given directory and wanted file name.
+ *  2-path.dirname(path2) --> represent path .
+ *  3-path.extname(path2) --> gets extention.
+ *  4-path.parse(file) --> gets all data associated with path
+ */ 
+const p=require("path");
+var p2=p.join(__dirname,"app.js");
+console.log(p2);
+console.log(p.dirname(p2));
+console.log(p.parse(__filename))
