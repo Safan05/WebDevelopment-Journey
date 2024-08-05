@@ -164,19 +164,181 @@ let y=5;
             },0)
         }
     }
+   // uncomment the 3 next lines to run the example
+    /*
     obj1.display();     //undefined
     obj2.display();     //Abdallah
     obj3.display();     //Abdallah
+    */
     /**
-     * Promises
+     * String Improvents:
+     *  there are some newly added methods:
+     *      1-string.trim()     // used for space trimming before and after text.
+     *      2-string.trimLeft() & string.trimRight()    // trim just spaces at left and right of the text.
+     *      3-string.startsWith("substr")   // return boolean if it starts with a given substr.
+     *      4-string.endsWith("substr")   // return boolean if it ends with a given substr.
+     *      5-string.includes("substr")   // return boolean if it includes a given substr.
+     *      6-string.repeat(num)    // repeat the string num times.
+     *      7-string.fromCodePoint(ascii code)  // converts ascii code into char.
+     * more:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+     * 
+     *      String template:
+     *          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+     * 
      */
-    var p=new Promise(function(success,failure){
-        var z=0;
-        for(let i=0;i<=1000000000;i++)
-            z++;
-        success(z);
-    })
-    p.then(function(val){
-        console.log(`Hello From Promise ! ${val}`);
-    })
-    console.log("Waiting for promise ...")
+
+    /**
+     *  Iterable objects:
+     *      it is objects that have iterators like: array , string & map.
+     *      the iterator is got from array by [symbol.iterator()]
+     *      see this Example:
+     */
+        // iterators ex:
+            var itarray=[1,2,3,5,6,7]
+            var iter=itarray[Symbol.iterator]();
+    /**
+     * iter is now iterator object and has the .next() function , which just gets the next value inside the iterable object and a boolean desctibring wheather we are 
+     * done with iterations on the object or not.
+     * 
+     */
+        /**uncomment to run the Example */
+        /*
+        console.log(iter);
+        console.log(iter.next());
+        console.log(iter.next());
+        */
+    /**
+     * Class keyword:
+     *  it is a keyword added in ES6 to be used in creating classes , we add the constructor , setters , getters , methods and data members inside it  
+     *      methods and objects now can take keyword static and can be only accessed through the class as usual.
+     *      methods and objects can now be defined directly as private using # before it and it must be defined before constructor.
+     * see Ex: 7 for classes
+     */
+    // Ex:7
+        class person{
+            #number;
+            constructor(name,age,num){
+                this.PersonName=name?name:"";
+                this.PersonAge=age?age:1;
+                this.#number=num;
+            }
+            get PersonNm(){return this.PersonName;}
+            get PNum(){return this.#number;}
+            set PersonNm(val) {this.PersonName=val;}
+            static PersonsCount(){
+                console.log("Static Function");
+            }
+            static sti=0;
+        }
+        var moi=new person("Abdallah",20,"01098899071");
+        console.log(moi.PersonName);
+        console.log(moi.PersonAge);
+        console.log(moi.PersonNm);
+        person.PersonsCount();
+        console.log(++person.sti);
+        console.log(++person.sti);
+        console.log(++person.sti);
+        console.log(moi.number);        // will be undefined
+        console.log(moi.PNum);
+       // console.log(moi.#number);     // commented as it will gets error
+    /**
+     * Note: we can also use prototype and other used things in the constructor we made using js before ES6.
+     *  we deal with the class as the constructor function we did before so there is a prototype chain.
+     *      we can override using it like before.
+     *          Ex: toString() -> will return object object as it exists in it , but if we redifined it in our class it will output the redifined one "overriden"./
+     * 
+     * Inheritance:
+     *  we can make child class now using extend keyword the followin "class child extends parent"{
+     *                                                              
+     *                                                                  }
+     *  there is also super , which is the function that calls the parent constructor and pass the values to it.
+     *  see Ex8 for more:
+     */
+    // Ex8:
+        class std extends person{
+            constructor(name,age,id){
+                super(name,age);
+                this.Id=id;
+            }
+        }
+        // uncomment to run the Ex.
+        /*
+        var stdMoi=new std("Safan",19,"9230554")
+        console.log(stdMoi.PersonName);
+        console.log(stdMoi.Id);
+        */
+    /**
+     * We can make an object iterable by adding the [Symbol.iterator]() funciton inside it and make it return object containing next function , that return val and done.
+     * Or we can use *gen() function:
+     * it is defined by 
+     * function * "name"(){
+     * 
+     * }
+     * there is yield keyword , which is put inside the generator function , making it iterable on the yields
+     *  https://maharatech.gov.eg/mod/hvp/view.php?id=8068
+     * see this video for more.
+     */
+
+    /**
+     * Symbol:  it is a primitive data type added in ES6.   
+     *  know abuot it here:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+     */
+
+
+
+    /**
+     * Async :
+     *  async functions
+     *      at first to know async vs sync programming see this video:   https://www.youtube.com/watch?v=qsncfaOUpyg
+     *      more advanced video : https://www.youtube.com/watch?v=0vFgKr5bjWI&t=200s
+     *  so functions with callbacks are async functions , ex: setTimeout & setInterval functions
+     *  but what if you are having alot of callbacks 
+     *  see Ex9:
+     */
+    //Ex9:
+    function callBackHell(){
+        let x=1;
+         (function(){
+            let y=2;
+            let z=x+y;
+            console.log(`l1 ${z}`);
+            (function(){
+                let k=5;
+                let a=k+z;
+                console.log(`,l2 ${a}`);
+                (function(){
+                    let l=8;
+                    console.log(`,l3 ${l+a}`);
+                })()
+            })()
+        })();
+    }
+    // uncomment the call of the function to run the example.
+    callBackHell();
+    console.log("Ecoute moi!")
+  /**
+   * and now , do u see that this function with alot of callbacks regulated , or comfortable to eye ?
+   *            can u trace it?
+   * So we use promises:
+   *    Promises are used to prevent callBackHell and also it ensures that callBack functions are async meaning the rest of code won't wait untill they are done
+   *    The executor function of a Promise is always executed synchronously.
+   *    Any asynchronous operations inside the executor function will run asynchronously, and their results will be handled asynchronously.
+   *    The then and catch handlers will be executed asynchronously, after the current call stack is cleared.  
+   *     see Ex10:
+   * */
+
+    //Ex10:
+    // uncomment the example to run it
+     /*   var pr=new Promise(function(success,failure){
+            success();
+        })
+        pr.then(function(){
+            var z=0;
+            for(var i=0;i<10000000000;i++)
+                z++;
+            console.log("Promise is executed !")
+        })
+        console.log("waiting for the promise ... ")
+    */
+
+    // learn more about chained promises here: https://www.youtube.com/watch?v=EOysmTtZzzc&list=PLDoPjvoNmBAx3kiplQR_oeDqLDBUDYwVv&index=181
