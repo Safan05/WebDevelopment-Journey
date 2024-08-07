@@ -98,3 +98,176 @@ var p2=p.join(__dirname,"app.js");
 console.log(p2);
 console.log(p.dirname(p2));
 console.log(p.parse(__filename))
+/**
+ * fileSystem module:
+ *  Allows you to work with files on your system like read,write and delete.
+ *  required as "fs" ie: require("fs")  
+ *  
+ *  Methods:
+ *      readFile("filename","encoding",function(err,succ){});    //encoding usually becomes utf-8 or don't put anything and use tostring() that use utf-8 by default.
+ *      // note: in call back functions the first param always used for error.
+ *      readFileSync("filename","encoding");     
+ *      see Ex4:
+ *      writeFile("filename","text added",function(err){})  // it always ignore any data in the file and start from begining , 
+ *      also if the file is not created it creates it.
+ *      WriteFileSync("filename,"textadded);
+ *      appendFile("filename","text added",function(err){}) // same as write but complete on the existing data.
+ *      appendFileSync("filename","text added") 
+ *      // note : we use the sync functions if we want a certain arrangment and wants to keep it , as async functions are not executed on arrangment.
+ *      
+ *      unlink("filename",function(err){})  // deleting the file.
+ *      unlinkSync("filename")
+ * 
+ *      mkdir("dirname",function(err){})    // used for making directories "folders" , and also we can use the callback function to write files inside this dir 
+ *      or just with arrangment in sync.
+ *      mkdirSync("dirname")
+ *      see Ex5:
+ * 
+ *      readdir("dirname",function(err,files){})    // reads the name of files and folders inside a directory , see Ex6:
+ *      readdirSync("dirname")
+ * 
+ *      there is also 
+ *      removedir("dirname",function(err){})
+ */ 
+// Ex4:
+    const fs=require("fs");
+    fs.readFile("Ex4.txt","utf-8",(err,info)=>{
+        if(err)
+            console.log("Failed")
+        else
+            console.log(info);
+    })
+//Ex5:
+    fs.mkdir("New",(err)=>{
+        if(err)
+            console.error("Failed");
+        else{
+            process.chdir("./New");
+            fs.writeFile("NewFile","Hello From Node!",(err2)=>{
+                if(err2)
+                    console.error("failed");
+            })
+        }
+    })
+//Ex6:
+    fs.readdir("./New",(err,files)=>{
+        if(err)
+            console.log("Failed");
+        else
+            console.log(files)
+    })
+/**
+ * Event Module:
+ *  most of modules in nodejs are async response driven like the call back function inside the modules we've seen.
+ * 
+ * but custom event are got from events module which is required like other modules but it returns a class.
+ *  to make an events create instance from the returned class.
+ * 
+ *  methods:
+ *      eventobj.on("event name",()=>{handler func})    create handler based on the event name
+ *      eventobj.once("event name",()=>{handler func})  //  //  //  //  // //  //  //   //  // but run just the first time the event fired.
+ *      // handlers runs synchronous.
+ * 
+ *      eventobj.emit("event name")     // the event is fired when called.
+ *      eventobj.off("event name" , function)   // to stop or prevent handler from exectution, but note we must keep the function in a var so it won't be anonymous
+ *      see ex7:
+ */
+//Ex 7:
+const Event=require("events");
+var eventobj=new Event();
+eventobj.on("Seen",()=>{
+    console.log("seen 1");
+})
+var h2=()=>{
+    console.log("seen 2");
+};
+eventobj.on("Seen",h2)
+eventobj.once("Seen",()=>{
+    console.log("seen 3");
+})
+console.log("----------------------")
+eventobj.emit("Seen");
+console.log("----------------------")
+eventobj.emit("Seen");
+eventobj.off("Seen",h2);
+console.log("----------------------")
+eventobj.emit("Seen");
+console.log("----------------------")
+
+/**
+ * HTTP module:
+ * To make HTTP requests in Node.js, there is a built-in module HTTP in Node.js to transfer data over the HTTP. 
+ * To use the HTTP server in the node, we need to require the HTTP module. 
+ * The HTTP module creates an HTTP server that listens to server ports and gives a response back to the client.
+ *  
+ *  methods:
+ *  1-.createServer()   // used to create servers with a given port and return it
+ * it is required like any other required module.
+ *  server methods:
+ *  1-.listen(port,function())     // note ports from 0 to 1023 are already preserved so don't use them.
+ *  2-.on("request",(req,res)=>{ function })   // handling a server request , req is for request and res if for response 
+ *  note: handling server request can be a call back function inside .createserver() like Ex9:
+ *  An HTTP request is made from a client to a host located on the server in order to receive a resource needed to build the content.
+ *  req object have some properties:    
+ *      1-req.method    // get or post
+ *      2-req.url       // url of request
+ *  res object have some properties and methods too:
+ *      1-res.write(" ")        // write response to the client side
+ *      2-res.end()     // ending your resopnese
+ */
+    const http=require("http");
+// Ex8: uncomment it to run it.
+/*    const server_ex8=http.createServer();
+    server_ex8.listen(3000,()=>{ console.log("running Server from Ex8.....!!!");});
+    server_ex8.on("request",(req,res)=>{
+        console.log(req.url);
+        console.log(req.method);
+        console.log("request recived");
+        res.write("Hello from my first server !")
+        res.end();
+    });*/
+// Ex9: uncomment it to run it.
+  /*     const server_ex9=http.createServer((req,res)=>{
+        console.log(req.url);
+        console.log(req.method);
+        console.log("request recived");
+       // console.log("Nodemon test");      // uncomment it to test nodemon tool.
+        res.write("Safan greets you from his first server :)")
+        res.end();
+    });
+    server_ex9.listen(3000,()=>{ console.log("running Server from Ex9.....!!!");});
+
+    console.log("Waiting .... !")*/
+    /**
+     * We use nodemon for servers as it will detect the change in ur code automatically and update ur server without exiting by ^c then running again. 
+     */
+    // npm install -g nodemon
+    /**
+     * Url can be different for the same server , so we need handle this requests according to the url
+     * also we can make the response write html file so the response from the server is ourpage see example 10
+     */
+    // Ex10: uncomment it to run it.
+    const server_ex10=http.createServer((req,res)=>{
+        if(req.url=='/'){
+            res.write("Safan greets you from his first server :)")
+            res.end();
+        }
+        else if(req.url=="/home"){
+            fs.readFile("./home/home.html",(err,data)=>{
+                if(err)
+                    console.error("File Not Found !");
+                else
+                {
+                    res.write(data.toString());
+                    res.end();
+                }
+            })
+        }
+    });
+    server_ex10.listen(3000,()=>{ console.log("running Server from Ex10.....!!!");});
+
+    console.log("Waiting .... !")
+    /**
+     * Note: if html file is requesting files like css file , and it is not requested from node here 
+     * it's status will become pending and won't response.
+     */
