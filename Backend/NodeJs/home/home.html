@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <h2>Hello world from html requested by server</h2>
+    <button id="b9">Get Students</button>
+    <div class="data"></div>
 </body>
+<script>
+     var xhr=new XMLHttpRequest();
+        xhr.open('GET','http://localhost:3000/students');
+        var data;
+        xhr.onreadystatechange=()=>{
+            if(xhr.readyState==4){
+                if(xhr.status==200){
+                    data=JSON.parse(xhr.responseText);
+                    console.log(data);
+                }
+            }
+        }
+        xhr.send('');
+    var x=document.getElementById("b9");
+    x.onclick=()=>{
+        var d=document.getElementsByClassName("data");
+        var el=document.createElement("h3");
+        var no=document.createTextNode(JSON.stringify(data));
+        el.appendChild(no);
+        d[0].appendChild(el);
+    }
+</script>
 </html>

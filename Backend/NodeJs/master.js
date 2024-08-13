@@ -246,6 +246,55 @@ console.log("----------------------")
      * Url can be different for the same server , so we need handle this requests according to the url
      * also we can make the response write html file so the response from the server is ourpage see example 10
      */
+        /**
+     * Note: if html file is requesting files like css file , and it is not requested from node here 
+     * it's status will become pending and won't response.
+     */
+    /**
+     * HTTP header:
+     *  HTTP headers are the hidden communicator of the HTTP protocol, providing critical metadata for both requests and responses. 
+     *  They help define the security of the interaction, how to interpret the content, define capabilities of the actors, 
+     *  controlling caching, etc.
+     * 
+     *  more in : https://beeceptor.com/docs/concepts/http-headers/
+     * 
+     *  to see http header of any site : https://websniffer.com/
+     * 
+     *  http header are created implicitly.
+     *  http contains the status code too which we explained in js file 
+     *  we can use some methods and properties to set it on our own.
+     * 
+     *      1- res.statusCode   
+     *      2- res.writeHead("status code",{headers});
+     *      3- res.setHeader("{header as key value pairs}");
+     *       
+     * 
+     *  Responding with json object:
+     *      just put it in the res.write()
+     *  
+     * // see Home.html to see xhr request
+     */
+    const Ex10_JSON=[
+        {
+            "name":"Abdallah",
+            "Age":"20",
+            "Study":"Computer Engineering",
+            "hobby":"Physics"
+        },
+        {
+            "name":"Safan",
+            "Age":"19",
+            "Study":"Computer Engineering",
+            "hobby":"Math"
+        }
+        ,
+        {
+            "name":"Abdallah's Love",
+            "Age":"20",
+            "Study":"Guess",
+            "hobby":"Guess"
+        }
+    ]
     // Ex10: uncomment it to run it.
     const server_ex10=http.createServer((req,res)=>{
         if(req.url=='/'){
@@ -263,11 +312,38 @@ console.log("----------------------")
                 }
             })
         }
+        else if(req.url=="/style.css"){     // handling css file
+            fs.readFile("./home/style.css",(err,data)=>{
+                if(err)
+                    console.error("File Not Found !");
+                else
+                {
+                    res.write(data.toString());
+                    res.end();
+                }
+            })
+        }
+        else if(req.url=="/students"){
+            res.write(JSON.stringify(Ex10_JSON));
+            res.end();
+        }
+        else{
+            res.statusCode=404;
+            res.end();
+            // I made status code 404 for url's I've not handled as it is unfound ,
+            // so it won't be pending making the page loading all time like the css file before handling.
+        }
     });
     server_ex10.listen(3000,()=>{ console.log("running Server from Ex10.....!!!");});
 
     console.log("Waiting .... !")
-    /**
-     * Note: if html file is requesting files like css file , and it is not requested from node here 
-     * it's status will become pending and won't response.
-     */
+/**
+ * NPM:
+ *  it is a command line to deal with packages, packages are multible useful js files
+ *  to run it in a folder we first type npm init in cmd
+ *  it generates json for the created package , if we runned node . it will run the entrypoint of this package
+ * 
+ *  for license:https://spdx.org/licenses/
+ */
+
+/**More for NPM , application in NPM folder */
