@@ -35,3 +35,31 @@ console.log(moment().format("MMM"));
  *  Get more commands from link below:
  *  --> https://docs.npmjs.com/cli/v6/commands
  */
+
+/**
+ * Creating Custom modules
+ *  at first we have to check if we're using it at server side or client side 
+ *      the condition is 
+ *          if(typeof module!=="undefines"&&module.exports){
+ *                          //server side
+ *                          module.exports=definition();
+ *                      }
+ *          else
+ *                  // client side  
+ *                  context[modname]=definiton();
+ */
+
+    // Ex:
+  /*  (function (context,modname,definition){
+    if(typeof module!=="undefines"&&module.exports){
+         //server side
+        module.exports=definition();
+        }
+    else{
+         // client side  
+        context[modname]=definiton();
+    }})(this,"shoppingcard",()=>{
+
+    });
+*/
+// see it experimentally on custom folder
