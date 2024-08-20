@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/Normalize.css">
+    <title>PingPong Game</title>
+</head>
+<body>
+    <div class="Header">
+        <div class="container">
+            <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+            <div class="controls">
+                <h3 onclick="Start();">Start</h3>
+                <h3 onclick="Restart();">Restart</h3>
+            </div>
+        </div>
+    </div>
+    <div class="Landing">
+    <div class="container">
+    <canvas id="frame"></canvas>
+    </div>
+    </div>
+    <div class="options">
+        <div class="container">
+    <div class="select">
+        <div class="colors" onclick="ChangeCol('red');" style="color: red;"> red </div>
+        <div class="colors" onclick="ChangeCol('blue');"style="color: blue;"> blue </div>
+        <div class="colors" onclick="ChangeCol('orange');"style="color: orange;"> orange </div>
+        </div>
+    </div>
+    </div>
+    <div class="buttons">
+        <div class="container">
+        <i class="fa-solid fa-circle-arrow-up" onmousedown="Player_Bar.up();"></i>
+        <i class="fa-solid fa-circle-arrow-down" onmousedown="Player_Bar.down();"></i>
+        </div>
+    </div>
+    <script src="master.js"></script>
+</body>
+</html>
