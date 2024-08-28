@@ -1,14 +1,13 @@
 // like any used module we require it first
+process.on("uncaughtException",(exception)=>{console.log("Exception !")});  // used to handle any sync exception that may happen
+process.on("unhandledRejection",(exception)=>{console.log("Rejection !")});  // used to handle any asyn rejection that may happen
 const express=require("express");
 // if u look at express file , it returns a function create app and this function returns app function object so we store it in var app.
 const app=express();
 const path=require("path")
+const mongoose=require("mongoose");
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use((req,res,next)=>{
-  //  console.log("logging");
-    next();
-})
 app.use(express.static("public"));
 const cookieParser = require('cookie-parser')    // cookie-parser to use cookies like we did for json.
 const helmet=require('helmet');
@@ -20,6 +19,18 @@ const Ajv=require("ajv");   //it returns a class
 ajv=new Ajv();
 const { type } = require("os");
 const { kMaxLength } = require("buffer");
+const Students=require("./routes/students.js"); // routing structure 
+const logging=require("./middlewares/logging.js");  // custom middlewares structure, won't be applied on public as it comes before the middleware.
+app.use(logging);
+mongoose.connect("mongodb://localhost:27017/Training").then(()=>console.log("Database connected...")).catch((err)=>console.log(err));
+const userRouter=require("./routes/user.js");
+const authRouter=require("./routes/auth.js");
+const admin=require("./routes/admin.js");
+app.use("/api/login",authRouter);
+app.use("/api/users",userRouter);
+app.use("/api/students",Students);
+app.use("/api/admin",admin);
+//throw Error("unhandled excption");
 app.get("/",(req,res,next)=>{
     console.log("Stage1");
     next();
@@ -36,45 +47,7 @@ app.get("/",(req,res,next)=>{
 
 
 // for reading a variable form url we write /:id    here id will be a var stored in request.params.id.
-const students=[
-    {
-        name:'Abdallah',
-        Age:20,
-        id:3,
-        Study:'Computer Engineering',
-        hobby:'Physics'
-    },
-    {
-        name:'Safan',
-        Age:19,
-        id:1,
-        Study:'Computer Engineering',
-        hobby:'Math'
-    }
-    ,
-    {
-        name:`Abdallah's Love`,
-        Age:20,
-        id:2,
-        Study:'Guess',
-        hobby:'Guess'
-    },
-];
-app.all("/api/students",(req,res,next)=>{
-    console.log("A student request is recived");
-    next();
-})
-/*app.get("/api/students",(req,res)=>{
-    res.json(students);
-})*/
-app.get("/api/students",(req,res)=>{
-    res.render("demo.ejs",{std:students});
-})
-app.get("/api/students/:id",(req,res)=>{
-    let id=req.params.id;
-    let std=students.find((val,idx,arr)=>{return val.id==id})
-    res.json(std);
-})
+
 app.get("/welcome.html",(req,res)=>{
     console.log(req.query);
     console.log(req.query.fnm);
@@ -104,52 +77,7 @@ app.post("/welcome.html",(req,res)=>{
 // 1-PowerShell   -- cmd tool
 // 2-Postwoman    -- online tool
 // 3-postman      -- third party tool
-const std_Schema={
-    type:"object",
-    properties:{
-        Age:{type:"integer",minimum:18,maximum:45},
-        name:{type:"string"}
-    },
-    required:["Age","name"],
-    maxProperties:4,
-    minProperties:2
-}
-let validateStd=ajv.compile(std_Schema);
-// POST handling
-app.post("/api/students",(req,res)=>{
-    let valid=validateStd(req.body);
-    if(valid){
-    req.body.id=students.length+1;
-    students.push(req.body);
-    res.json(req.body);
-    }
-    else
-    res.status(403).send("invalid properties")
-})
 
-//Delete handling
-app.delete("/api/students/:id",(req,res)=>{
-    let idx=students.findIndex((val)=>{return val.id==req.params.id});
-    if(idx!=-1){
-    let deleted=students.splice(idx,1);
-    res.send("Object Deleted Succefully");
-    }
-    else
-    res.status(403).send("Cannot delete it");
-})
-
-//PUT handling
-app.put("/api/students/:id",(req,res)=>{
-    let idx=students.findIndex((val)=>{return val.id==req.params.id});
-    if(idx!=-1){
-        for(i in req.body){
-            students[idx][i]=req.body[i];
-        }
-        res.json(students[idx]);
-    }
-    else
-    res.status(403).send("Cannot update it");
-})
 app.get("/cookie",(req,res)=>{
     console.log(Buffer.from(req.cookies.usrname,'base64').toString());
     console.log(req.cookies.Age);
@@ -191,12 +119,40 @@ app.get("/cookie",(req,res)=>{
  *          1- helmet: add http headers to make the application more secure.
  *          2- cookie-parser: to parse the cookies in req when we use it anywhere inside the server.
  * 5-Error-handling
+ *      // used as the last middleware in the pipeline and it is used to handle catch statements
  * 6-Parameters
  *      // used to handle parameters in the url before handling it inside the route handler it self , see a tutorial for it. 
  */ 
 
 // Template engines , they are used so we can embbed js in html or they are used to put our response in html files but with extnesion
 // according to used template engine, I'll put example for students get api and if u want to run it just uncomment on of the commented one.
+// for app.set()-->https://expressjs.com/en/api.html#app.set
+
+
+// now I'm going to make each api in a module so our project is well structured.
+
+// routes folder is used to make a file for each api "routes" to handle it then require each one here
+// middlewares folder is used to make a file for each custom middleware to require it here before u want to use it.
+// util folder is used to make a file for each used function like validator.
+// data folder is used to contain the data for the project like: students.json or if there exists a database.
+// models folder is used to keep function like getters,setters for the data.
+// public folder contains the static files used for the front-end like html
+// views folder contains the files that is interactive with js like sending the data to html file in ejs extenstion.
+// I will complete the mongodb , or link with it in another folder called mongodb in the nodejs folder.
+
+// now after the mongodb demo I'll create a new model to deal with students as a database not json.
+
+
+// If the operation is not CRUD operation it is preferrable to do it with post for more security.
+
+// to keep our data secret from code , which is important to security we save our data
+// in config folder as json files and use config package to get the key from the running environment "Server" not from the code itself
+
+// authorization is to make some users access some endpoints that are not accessed by others
+// I'll use it here to make admin users access all CRUD operations on students while any other users access only read.
+
+// process.exit(0)  succefull exit
+// procces.exit(1)  error exist and the process manager on the host will restart it
 const port=process.env.PORT||3000;
 app.listen(port,()=>{console.log(`listening to port ${port} ..... !`);}); 
 

@@ -8,7 +8,7 @@ of name db , as this is the default path of the database server
 ======================================================================================================================
 --> To open the ide of mongo 
     1- at first run the server and leave the cmd running it without closing
-    2- open another cmd and run mongo.exe   // note server was mongod.exe but ide is mongo.exe
+    2- open another cmd and run mongosh.exe   // note server was mongod.exe but ide is mongosh.exe
     3- now u are having an ide to write mongo commands and u will find a connection added on the server
 
 but note that mongo,exe no longer exist after v6 , download mongo shell from this link and open it instead:
