@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--Bootstrap Link-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="/style.css" rel="stylesheet">
+    <!--We have linked the css and js of bootstrap above-->
+</head>
+<body>
+    <div class="all">
+<div class="container">
+    <div class="row row-cols-3 gy-3">
+        <div class="col-xl-4 col-lg-4 col-8"><div class="box">Hello</div></div>
+        <div class="col-8"><div class="box">Hello</div></div>
+    </div>
+    <!--Now Let's create table using bootstrap-->
+    <table class="table table-hover">
+        <thead>
+            <th>First</th>
+            <th>Last</th>
+            <th>Age</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Abdallah</td>
+                <td>Ahmed</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Abdallah</td>
+                <td>Ahmed</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Abdallah</td>
+                <td>Ahmed</td>
+                <td>20</td>
+            </tr>
+        </tbody>
+    </table>
+    <!--Now let's go to forms-->
+    <form>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control">
+        <button>Submit</button>
+    </form>
+</div>
+    </div>
+</body>
+</html>
+<!--
+1- To link bootstrap in normal html use the 2 links above or use npm in react, node js
+
+
+The classes names and it's usages:
+    1-container : like the container made anywhere and it has sizes so it can be container-lg or container-sm
+    2- row and column classes: used to creat rows and columns like for a table
+    // columns are divided in rows into 12 workspaces so u can define for them the space that it must occupy just type col- 
+    // and intellisense will complete it for u.
+    // if sizes sum up to more than 12 it will be in new row , also u can use col-auto which fits the data inside
+    // u can also define offset which is number of columns from 12 it will be far from the last one
+    // you can change the number 12 which max columns in a row by adding row-cols-num beside class row
+    // you can set gy "y-axis gap" or gx "x-axis gap" beside row too.
+
+    3-table: it's added to table tag as a class and it makes it look prettier than usual un styled table
+    // u can add themes to the table like table-primary or table-success , etc.. 
+    // there is table-hover which makes row colors change when hover
+    // you can add the whole tag in table-responsive class which used to make it responsive 
+
+    4- form:
+        1-form-control: added to input of form to give it good design when pressing it and also make it's width take all page
+        2-form-label: give the label prettier look.
+-----------------------------------------------------------------
+
+You can define breakpoints or behaviour for each size "Responsive"
+like col we can define it as classes="col-xl-2 col-lg-4 col-8"
+so here at XL screens it will be 2 sized and at Lg it will 4 sized otherwise it will be 8 col 
+and if u don't define else it will take 100% of row 
+-->
